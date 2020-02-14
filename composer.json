@@ -1,0 +1,33 @@
+{
+    "name": "jbdabes/discord-webhooks",
+    "description": "Use Discord webhooks with ease.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JB",
+            "email": "jb@p0wersurge.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DiscordWebhooks\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "guzzlehttp/guzzle": "^6.5",
+        "nesbot/carbon": "^2.29",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "vlucas/phpdotenv": "^4.1",
+        "symfony/var-dumper": "^5.0",
+        "phpunit/phpunit": "^8.5"
+    }
+}
