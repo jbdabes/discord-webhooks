@@ -304,4 +304,30 @@ class WebhookTest extends BaseTest
 
         $webhook->send();
     }
+
+    /**
+     * @test
+     * @throws InvalidKeyException
+     */
+    public function canAddWebhookUrlsProgrammatically()
+    {
+        $webhook = new Webhook();
+        $this->assertCount(0, $webhook->urls()->all());
+
+        $webhook->urls()->add("http://example.com");
+        $this->assertCount(1, $webhook->urls()->all());
+
+        $webhook->urls()->add(getenv("http://example.com"));
+        $this->assertCount(2, $webhook->urls()->all());
+
+        // What about defining several webhooks in the constructor?
+        $webhook = new Webhook(["http://example.com", "http://example.com"]);
+        $this->assertCount(2, $webhook->urls()->all());
+
+        $webhook->urls()->add(getenv("WEBHOOK_URL"));
+        $this->assertCount(3, $webhook->urls()->all());
+
+        $webhook->urls()->add(getenv("SECOND_WEBHOOK_URL"));
+        $this->assertCount(4, $webhook->urls()->all());
+    }
 }
