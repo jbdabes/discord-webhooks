@@ -8,11 +8,25 @@ trait IsCollection
 {
     private $items = [];
 
+    /**
+     * Checks if the collection has an item via its' key.
+     * @param $key
+     *
+     * @return bool
+     */
     public function has($key): bool
     {
         return isset($this->items[$key]);
     }
 
+    /**
+     * Add an item to the collection, with a given key if provided.
+     * @param      $item
+     * @param null $key
+     *
+     * @return bool
+     * @throws InvalidKeyException
+     */
     public function add($item, $key = null): bool
     {
         if ($key === null) {
@@ -30,7 +44,14 @@ trait IsCollection
         return true;
     }
 
-    public function addAll($array)
+    /**
+     * Iterate an array and add all elements with their given keys, if provided.
+     * @param $array
+     *
+     * @return bool
+     * @throws InvalidKeyException
+     */
+    public function addAll(array $array): bool
     {
         if (empty($array)) {
             throw new \InvalidArgumentException("Data provided cannot be empty.");
@@ -43,6 +64,13 @@ trait IsCollection
         return true;
     }
 
+    /**
+     * Remove an item from the collection via its' key.
+     * @param $key
+     *
+     * @return bool
+     * @throws InvalidKeyException
+     */
     public function remove($key): bool
     {
         if (! $this->has($key)) {
@@ -54,6 +82,13 @@ trait IsCollection
         return true;
     }
 
+    /**
+     * Retrieve an item or all items from the collection.
+     * @param null $key
+     *
+     * @return mixed
+     * @throws InvalidKeyException
+     */
     public function get($key = null)
     {
         if ($key === null) {
@@ -67,8 +102,23 @@ trait IsCollection
         return $this->items[$key];
     }
 
-    public function all()
+    /**
+     * Retrieve all items.
+     *
+     * @return array
+     */
+    public function all(): array
     {
         return $this->items;
+    }
+
+    /**
+     * Count all items.
+     *
+     * @return int
+     */
+    public function count(): int
+    {
+        return count($this->all());
     }
 }
