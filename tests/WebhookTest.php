@@ -288,4 +288,20 @@ class WebhookTest extends BaseTest
 
         $this->assertTrue($response);
     }
+
+    /**
+     * @test
+     * @throws InvalidKeyException
+     * @throws InvalidWebhookException
+     */
+    public function webhooksMustHaveAUrl()
+    {
+        $this->expectException(InvalidWebhookException::class);
+
+        $webhook = new Webhook();
+
+        $webhook->setContent("Test: Webhooks must have a URL.");
+
+        $webhook->send();
+    }
 }

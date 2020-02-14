@@ -26,17 +26,19 @@ class Webhook
      * @throws InvalidArgumentException
      * @throws Exceptions\InvalidKeyException
      */
-    public function __construct($webhookURLs)
+    public function __construct($webhookURLs = null)
     {
         $this->urls   = new WebhookUrls();
         $this->embeds = new WebhookEmbeds();
 
-        if (is_array($webhookURLs)) {
-            $this->urls()->addAll($webhookURLs);
-        } else if (is_string($webhookURLs)) {
-            $this->urls()->add($webhookURLs);
-        } else {
-            throw new InvalidArgumentException("Argument passed to Webhook should be string or array.");
+        if ($webhookURLs !== null) {
+            if (is_array($webhookURLs)) {
+                $this->urls()->addAll($webhookURLs);
+            } else if (is_string($webhookURLs)) {
+                $this->urls()->add($webhookURLs);
+            } else {
+                throw new InvalidArgumentException("Argument passed to Webhook should be string or array.");
+            }
         }
     }
 
@@ -151,6 +153,10 @@ class Webhook
      */
     public function send(): bool
     {
+        if (empty($this->urls()->all())) {
+            throw new InvalidWebhookException("No webhook URLs have been set.");
+        }
+
         // Loop through all applicable webhooks
         foreach ($this->urls()->all() as $webhookURL) {
             // Use a try/catch so we can fire our own exception(s)
