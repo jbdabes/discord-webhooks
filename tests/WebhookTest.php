@@ -24,7 +24,6 @@ class WebhookTest extends BaseTest
         $webhook->setUsername("Some Random Name");
         $webhook->setContent("This message should have a different name than the one it should have.");
         $response = $webhook->send();
-
         $this->assertTrue($response);
     }
 
@@ -329,5 +328,7 @@ class WebhookTest extends BaseTest
 
         $webhook->urls()->add(getenv("SECOND_WEBHOOK_URL"));
         $this->assertCount(4, $webhook->urls()->all());
+
+        $webhook->urls()->add('test');
     }
 }

@@ -20,14 +20,14 @@
         }
     },
     "require": {
-        "php": "^7.2",
-        "guzzlehttp/guzzle": "^6.5",
+        "php": "^7.2|^8.0",
+        "guzzlehttp/guzzle": "^6.5|^7.0",
         "nesbot/carbon": "^2.29",
         "ext-json": "*"
     },
     "require-dev": {
         "vlucas/phpdotenv": "^4.1",
         "symfony/var-dumper": "^5.0",
-        "phpunit/phpunit": "^8.5"
+        "phpunit/phpunit": "^8.5|^9.0"
     }
 }

@@ -6,8 +6,17 @@ use DiscordWebhooks\Exceptions\InvalidEmbedException;
 
 trait CanHaveIconUrlProperty
 {
+    /**
+     * @var string
+     */
     protected $iconUrl;
 
+    /**
+     * @param $url
+     *
+     * @return $this
+     * @throws InvalidEmbedException
+     */
     public function setIconUrl($url)
     {
         if (! filter_var($url, FILTER_VALIDATE_URL)) {

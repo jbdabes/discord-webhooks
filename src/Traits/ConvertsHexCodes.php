@@ -4,18 +4,20 @@ namespace DiscordWebhooks\Traits;
 
 trait ConvertsHexCodes
 {
-    private function convertHexToDec($color)
+
+    /**
+     * Convert a hex color code to decimal format.
+     * @param $color
+     *
+     * @return int
+     */
+    private function convertHexToDec($color): int
     {
-        // See if the user has left a hash at the start, if so remove it.
+        // Check if we are processing a hex code.
         if (substr($color, 0, 1) === "#") {
-            $color = substr($color, 1);
+            $color = hexdec(substr($color, 1));
         }
 
-        // Check if we have a hex code, if so convert it to decimal.
-        if (ctype_xdigit($color)) {
-            $color = hexdec($color);
-        }
-
-        return $color;
+        return (int)$color;
     }
 }
